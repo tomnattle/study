@@ -1,0 +1,47 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	pb "gitlab.ifchange.com/bot/proto/talent_sketch"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+)
+
+//********************************
+type TokenAuth struct {
+	Token string
+}
+
+func (t TokenAuth) GetRequestMetadata(ctx context.Context, in ...string) (map[string]string, error) {
+	return map[string]string{
+		"authorization-token": t.Token,
+	}, nil
+}
+func (TokenAuth) RequireTransportSecurity() bool {
+	return true
+}
+
+//********************************
+
+func main() {
+
+	creds, _ := credentials.NewClientTLSFromFile("./server.crt", "talent_sketch.dev.bot.grpc")
+
+	conn, _ := grpc.Dial(
+		"192.168.1.174:51804",
+		grpc.WithTransportCredentials(creds),
+		grpc.WithPerRPCCredentials(TokenAuth{
+			Token: "test",
+		}),
+	)
+
+	client := pb.NewSketchServiceClient(conn)
+	p := &pb.ViewExamRequest{
+		UserId: 1000011075,
+	}
+	res, _ := client.ViewCoreExam(context.Background(), p)
+	str, _ := json.Marshal(res)
+	fmt.Println(string(str))
+}

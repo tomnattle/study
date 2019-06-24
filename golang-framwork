@@ -1,0 +1,13 @@
+http服务监听处理请求  httpserver
+路由转发  router
+请求上下文  context
+中间件  middleware
+参数解析  http request
+命令参数解析  flag.Parse
+配置读取  config/toml/json
+日志配置  logger
+错误处理  error
+数据库  mysql
+缓存  redis/memcache
+请求  httpclient
+

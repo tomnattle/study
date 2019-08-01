@@ -1,0 +1,6 @@
+proj_back=(" "dashboard")
+
+for proj in ${proj_back[@]};
+do
+   git clone git@gitlab.x.com:bot/${proj}.git
+done

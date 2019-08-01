@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+
+	"time"
+)
+
+func main() {
+	fmt.Println("nice")
+	c := make(chan int, 0)
+	c1 := make(chan int, 0)
+	go job(c, c1)
+
+	go func() {
+		time.Sleep(3 * time.Second)
+		c <- 1
+	}()
+	<-c1
+}
+
+func job(c chan int, c1 chan int) {
+	defer func() {
+		fmt.Println("exit")
+	}()
+	for {
+		select {
+		case <-c:
+			c1 <- 1
+			return
+		default:
+			time.Sleep(1 * time.Second)
+			fmt.Println("...")
+		}
+	}
+}

@@ -15,7 +15,7 @@ func doJob(ctx context.Context, c <-chan int) (cancel context.CancelFunc) {
 	for {
 		select {
 		case <-ctx.Done():
-			fmt.Println("context done")
+			fmt.Println("context done", ctx.Err())
 			return
 		case <-c:
 			fmt.Println("recieve a job")

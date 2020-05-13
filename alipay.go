@@ -57,7 +57,7 @@ func AesDecrypt(pass, key string) (_pass string, err error) {
 
 func TestEnc(t *testing.T) {
 	pass := "Uy3QFmIPvBIdwdlAdewJ5dlgkGF3NPpC3I/ptd9aTgW4DzceDIN2poatCfYu+VQsmp5bQHeSQEIw3Td3vi2C1pkRks3JLjdYURjcc9rrk1YstzqXjMlL7pNjlDp6RzKyLW1Mhn1bwQEkXXW8PCB88dFFj1UzORVPAnu7jQEF8ENuljE+/mIBV/QTB0cRmZt22xWHJhFNVh4T3srFQ4C/GAq98Tf0xwsB9sUNb69nWJlBa4Ma6dyfSzWsrCXUmM9t6KjEHlSa44Jj4W7pNwfAqWERIteqioGpAcKUL6x5FHWPzhVIaEbEKxT8/28i07ueQTSZZ+48FkV+DoW/TAWCRs7RBY8ib1c2EKfzqiatZyU="
-	key := "GWSGRykqLqavn2vZ9Hv0rg=="
+	key := "GWSGRykqLqavn2vZ9Hv1rg=="
 
 	tpass, err := AesDecrypt(pass, key)
 	if err != nil {
